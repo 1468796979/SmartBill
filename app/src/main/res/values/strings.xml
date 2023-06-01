@@ -1,6 +1,50 @@
 <resources>
-    <string name="app_name">SmartBill</string>
+    <string name="app_name">Smart Bill</string>
     <string name="title_person">Person</string>
     <string name="title_group">Group</string>
     <string name="title_setting">Setting</string>
+
+    <string name="add_new">+</string>
+    <string name="month_ex">Expense This Month</string>
+    <string name="expense">Expense</string>
+    <string name="month_in">Income This Month</string>
+    <string name="in">Income</string>
+    <string name="budget">Budget</string>
+    <string name="set_budget">Set Budget</string>
+    <string name="view_chart">View Chart Analysis</string>
+    <string name="add_remark">Add a Note</string>
+    <string name="remark">Note</string>
+    <string name="ensure">Ensure</string>
+    <string name="cancel">Cancel</string>
+    <string name="about">about</string>
+    <string name="setting">Setting</string>
+    <string name="history_record">record history</string>
+    <string name="account_info">Account detail</string>
+    <string name="please_input_time">please input time(24hours)</string>
+    <string name="please_search_info">search info</string>
+    <string name="date_empty">data is empty</string>
+    <string name="chart_info">chart</string>
+
+
+    <string name="about_appinfo">application info</string>
+    <string name="about_version">version</string>
+    <string name="about_1">1.0</string>
+    <string name="about_app">about app</string>
+    <string name="about_balabala">anythings</string>
+    <string name="about_developer">developer</string>
+    <string name="about_me">about me</string>
+    <string name="about_loc">location:</string>
+    <string name="about_email">send email</string>
+    <string name="about_email2">developer email:</string>
+    <string name="about_code">code</string>
+    <string name="about_codeinfo">code address</string>
+    <string name="about_B">bilibili address</string>
+    <string name="about_B2">address</string>
+
+    <string name="history_info">Billing records for this month</string>
+    <string name="clear_all">clear all records</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="not_data">No data</string>
+
 </resources>
