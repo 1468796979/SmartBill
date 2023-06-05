@@ -10,7 +10,7 @@ public class GroupViewModel extends ViewModel {
 
     public GroupViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is group fragment");
+        mText.setValue("Group");
     }
 
     public LiveData<String> getText() {
