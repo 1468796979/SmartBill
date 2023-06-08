@@ -11,15 +11,15 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/blue_700">
-    <TextView
-        android:id="@+id/text_person"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:padding="10dp"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:textColor="@color/black"/>
+        <TextView
+            android:id="@+id/text_person"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@color/black"/>
         <ImageView
             android:id="@+id/person_iv_search"
             android:layout_width="wrap_content"
@@ -50,4 +50,7 @@
         android:contentDescription="Add Button"
         android:background="@color/white"
         android:src="@drawable/baseline_add_80"/>
+
+
+
 </RelativeLayout>

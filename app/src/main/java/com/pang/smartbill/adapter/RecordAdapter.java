@@ -2,7 +2,7 @@ package com.pang.smartbill.adapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
@@ -12,6 +12,8 @@ import java.util.List;
 
 public class RecordAdapter extends FragmentPagerAdapter {
     private List<Fragment> fragmentList;
+
+    String[]titles = {"expense","income"};
 
     public RecordAdapter(FragmentManager fragmentManager, List<Fragment> fragmentList) {
         super(fragmentManager);
@@ -26,5 +28,9 @@ public class RecordAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         return fragmentList.size();
+    }
+
+    public CharSequence getPageTitle(int position) {
+        return titles[position];
     }
 }

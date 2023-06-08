@@ -1,4 +1,4 @@
-package com.pang.smartbill;
+package com.pang.smartbill.ui.person;
 
 import android.os.Bundle;
 
@@ -38,12 +38,14 @@ import com.pang.smartbill.ui.setting.SettingFragment;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import com.pang.smartbill.R;
+import com.pang.smartbill.SearchActivity;
+import com.pang.smartbill.RecordActivity;
+import com.pang.smartbill.MonthChartActivity;
 
-public class MainActivity extends AppCompatActivity  implements View.OnClickListener{
+public class PersonMain extends AppCompatActivity  implements View.OnClickListener{
 
     private ActivityMainBinding binding;
-
-//    ArrayList<Fragment> fragmentArrayList = new ArrayList<>();
 
     ListView todayLv;
     ImageView searchIv;
@@ -56,7 +58,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
 
     View headerView;
     TextView topOutTv,topInTv,topbudgetTv,topConTv;
-   // ImageView topShowIv;
+    // ImageView topShowIv;
     SharedPreferences preferences;
 
     @Override
@@ -79,59 +81,27 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         adapter = new AccountAdapter(this, mDatas);
         todayLv.setAdapter(adapter);
 
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-//        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-//                R.id.navigation_person, R.id.navigation_group, R.id.navigation_setting)
-//               .build();
-//        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
-
-        NavigationUI.setupWithNavController(binding.navView, navController);
-
-        BottomNavigationView BottomNavigationView = findViewById(R.id.nav_view);
-
-//        replaceFragment(new PersonFragment());
-
-//        binding.navView.setOnNavigationItemSelectedListener(item -> {
-//
-//
-//
-//
-//            int itemId =item.getItemId();
-//            if(itemId == R.id.navigation_person){
-//                replaceFragment(new PersonFragment());
-//            } else if (itemId == R.id.navigation_group) {
-//                replaceFragment(new GroupFragment());
-//            } else if (itemId == R.id.navigation_setting) {
-//                replaceFragment(new SettingFragment());
-//            }
-//            return true;
-//        });
 
     }
 
-    private void replaceFragment(Fragment fragment){
+    public void replaceFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.nav_host_fragment_activity_main,fragment);
-        fragmentTransaction.commit();
-
     }
 
-    private void initView() {
+    public void initView() {
         todayLv = findViewById(R.id.person_lv);
         editBtn = findViewById(R.id.person_btn_add);
-       // moreBtn = findViewById(R.id.main_btn_more);
+        // moreBtn = findViewById(R.id.main_btn_more);
         searchIv = findViewById(R.id.person_iv_search);
         editBtn.setOnClickListener(this);
-       // moreBtn.setOnClickListener(this);
+        // moreBtn.setOnClickListener(this);
         searchIv.setOnClickListener(this);
         setLVLongClickListener();
     }
 
-    private void setLVLongClickListener() {
+    public void setLVLongClickListener() {
         todayLv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -148,7 +118,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         });
     }
 
-    private void showDeleteItemDialog(final  AccountBean clickBean) {
+    public void showDeleteItemDialog(final  AccountBean clickBean) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("prompt ").setMessage("Are you sure you want to delete this record？")
                 .setNegativeButton("Cancel",null)
@@ -167,7 +137,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
     }
 
 
-    private void addLVHeaderView() {
+    public void addLVHeaderView() {
 
         headerView = getLayoutInflater().inflate(R.layout.item_mainlv_top, null);
         todayLv.addHeaderView(headerView);
@@ -180,11 +150,11 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
 
         topbudgetTv.setOnClickListener(this);
         headerView.setOnClickListener(this);
-       // topShowIv.setOnClickListener(this);
+        // topShowIv.setOnClickListener(this);
 
     }
 
-    private void initTime() {
+    public void initTime() {
         Calendar calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH)+1;
@@ -199,7 +169,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         setTopTvShow();
     }
 
-    private void setTopTvShow() {
+    public void setTopTvShow() {
 
         float incomeOneDay = DBManager.getSumMoneyOneDay(year, month, day, 1);
         float outcomeOneDay = DBManager.getSumMoneyOneDay(year, month, day, 0);
@@ -222,7 +192,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
     }
 
 
-    private void loadDBData() {
+    public void loadDBData() {
         List<AccountBean> list = DBManager.getAccountListOneDayFromAccounttb(year, month, day);
         mDatas.clear();
         mDatas.addAll(list);
@@ -236,12 +206,12 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         int viewId =v.getId();
         if(viewId == R.id.person_iv_search){
             Intent it = new Intent(this, SearchActivity.class);
-               startActivity(it);
+            startActivity(it);
         } else if (viewId == R.id.person_btn_add) {
             Intent it1 = new Intent(this, RecordActivity.class);
-                startActivity(it1);
+            startActivity(it1);
         } else if (viewId == R.id.item_mainlv_top_tv_budget) {
-                showBudgetDialog();
+            showBudgetDialog();
         }
 
 //        switch (v.getId()) {
