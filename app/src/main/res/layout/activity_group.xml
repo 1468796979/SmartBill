@@ -4,59 +4,47 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".GroupActivity">
 
 
         <RelativeLayout
-            android:id="@+id/person_top_layout"
+            android:id="@+id/group_top_layout"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@color/blue_700">
             <TextView
-                android:id="@+id/text_person"
+                android:id="@+id/text_group"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="Person"
+                android:text="Group"
                 android:padding="10dp"
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:textColor="@color/black"/>
-            <ImageView
-                android:id="@+id/person_iv_search"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@mipmap/search"
-                android:layout_alignParentRight="true"
-                android:padding="10dp"/>
         </RelativeLayout>
 
+
         <ListView
-            android:id="@+id/person_lv"
+            android:id="@+id/group_lv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/person_top_layout"
+            android:layout_below="@id/group_top_layout"
             android:padding="10dp"
             android:divider="@null"
             android:dividerHeight="6dp"
             android:scrollbars="none"
             android:background="@color/white"/>
-
         <ImageButton
-            android:id="@+id/person_btn_add"
+            android:id="@+id/main_btn_edit"
             android:layout_width="70dp"
             android:layout_height="80dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="70dp"
             android:layout_marginEnd="20dp"
-            android:contentDescription="Add Button"
             android:background="@color/white"
             android:src="@drawable/baseline_add_80"/>
-
-
-
-
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
@@ -74,6 +62,7 @@
         app:itemRippleColor="@android:color/transparent"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_nav_menu" />
+
 
 
 </RelativeLayout>

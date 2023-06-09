@@ -1,39 +1,78 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/grey_f3f3f3">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp">
-        <ImageView
-            android:id="@+id/setting_iv_back"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@mipmap/it_back"
-            android:layout_marginLeft="10dp"
-            android:onClick="onClick"/>
-        <TextView
-            android:layout_width="wrap_content"
+    tools:context=".SettingActivity">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/setting"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_centerInParent="true"/>
-    </RelativeLayout>
-    <TextView
-        android:id="@+id/setting_tv_clear"
+            android:orientation="vertical"
+            android:background="@color/white">
+
+            <Button
+                android:id="@+id/dialog_more_btn_about"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:drawableTop="@mipmap/it_guanyu"
+                style="@style/settingStyle"
+                android:textColor="@color/white"
+                android:text="@string/about"/>
+
+            <Button
+                android:id="@+id/dialog_more_btn_setting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableTop="@mipmap/it_shezhi"
+                android:layout_marginTop="20dp"
+                style="@style/settingStyle"
+                android:text="@string/clear_records"/>
+
+            <Button
+                android:id="@+id/dialog_more_btn_record"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableTop="@mipmap/it_jilu"
+                android:layout_marginTop="20dp"
+
+                style="@style/settingStyle"
+                android:text="@string/history_record"/>
+
+            <Button
+                android:id="@+id/dialog_more_btn_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                style="@style/settingStyle"
+                android:drawableTop="@mipmap/it_xiqing"
+                android:text="@string/account_info" />
+
+
+        </LinearLayout>
+
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/clear_all"
-        android:onClick="onClick"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:padding="15dp"
-        android:background="@color/white"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/grey_7D7D7D"/>
-</LinearLayout>
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="2dp"
+
+        android:elevation="2dp"
+        app:itemIconSize="30dp"
+        app:itemIconTint="@drawable/item_selector"
+        app:itemRippleColor="@android:color/transparent"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/bottom_nav_menu" />
+
+
+
+</RelativeLayout>
