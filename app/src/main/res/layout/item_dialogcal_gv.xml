@@ -10,6 +10,6 @@
         android:text="2020-1"
         android:padding="8dp"
         android:gravity="center"
-        android:background="@color/grey_f3f3f3"
+        android:background="@color/white"
         android:textColor="@color/black"/>
 </LinearLayout>

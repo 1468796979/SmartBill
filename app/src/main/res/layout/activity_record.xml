@@ -23,8 +23,9 @@
             app:tabGravity="center"
             app:tabMode="fixed"
             app:tabTextColor="@color/black"
+            android:background="@color/blue_500"
             app:tabSelectedTextColor="@color/white"
-            app:tabIndicatorColor="@color/black"/>
+            app:tabIndicatorColor="@color/yellow"/>
     </RelativeLayout>
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/record_vp"
