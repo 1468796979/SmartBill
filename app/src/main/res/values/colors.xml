@@ -8,13 +8,14 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
 
-    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimary">#FF90CAF9</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="grey_f3f3f3">#f3f3f3</color>
     <color name="grey_7D7D7D">#7D7D7D</color>
     <color name="green_006400">#006400</color>
     <color name="darkblue">#6666ff</color>
+    <color name="blue_100">#E2F0FB</color>
     <color name="blue_200">#FF90CAF9</color>
     <color name="blue_500">#FF2196F3</color>
     <color name="blue_700">#FF1976D2</color>
