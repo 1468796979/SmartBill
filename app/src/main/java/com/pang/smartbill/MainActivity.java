@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     View headerView;
     TextView topOutTv,topInTv,topbudgetTv,topConTv;
-    ImageView topShowIv;
+//    ImageView topShowIv;
     SharedPreferences preferences;
 
     @Override

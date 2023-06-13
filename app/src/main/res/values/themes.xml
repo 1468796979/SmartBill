@@ -22,7 +22,12 @@
         <item name="android:layout_height">100dp</item>
         <item name="android:layout_width">0dp</item>
     </style>
-
+    <style name="ButtomStyle">
+        <item name="android:background">@color/white</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_height">10dp</item>
+        <item name="android:layout_width">10dp</item>
+    </style>
     <style name="settingStyle">
         <item name="android:background">@color/white</item>
         <item name="android:padding">15dp</item>
