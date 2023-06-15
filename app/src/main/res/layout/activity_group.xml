@@ -32,7 +32,7 @@
             android:layout_below="@id/group_top_layout"
             android:padding="10dp"
             android:divider="@null"
-            android:dividerHeight="6dp"
+            android:dividerHeight="10dp"
             android:scrollbars="none"
             android:background="@color/white"/>
         <ImageButton

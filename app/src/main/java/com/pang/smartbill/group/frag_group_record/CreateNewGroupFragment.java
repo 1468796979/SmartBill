@@ -13,12 +13,15 @@ import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.pang.smartbill.R;
 import com.pang.smartbill.db.AccountBean;
+import com.pang.smartbill.db.DBManager;
+import com.pang.smartbill.db.GroupBean;
 import com.pang.smartbill.db.TypeBean;
 import com.pang.smartbill.ui.KeyBoardUtils;
 import com.pang.smartbill.ui.NoteDialog;
@@ -32,11 +35,22 @@ import java.util.List;
 
 public class CreateNewGroupFragment extends Fragment{
 
-
-    EditText titleEt,descriptionEt;
-    GridView typeGv;
+     EditText titleEt,descriptionEt,categoryEt;
+//    GridView typeGv;
     ImageView backIB;
     Button saveTv,addMemberBt;
+
+    GroupBean groupBean; //save group info to a object
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        groupBean = new GroupBean(); //create a object
+        groupBean.setCurrency("MYR");
+        groupBean.setCategory("others");
+
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,6 +62,8 @@ public class CreateNewGroupFragment extends Fragment{
         //GridView
 //        loadDataToGV();
 //        setGVListener(); //set GridView onclick
+
+
         return view;
     }
 
@@ -56,8 +72,10 @@ public class CreateNewGroupFragment extends Fragment{
         titleEt = view.findViewById(R.id.group_title_et);
         descriptionEt = view.findViewById(R.id.group_description_et);
         backIB = view.findViewById(R.id.group_record_iv_back);
-        typeGv = view.findViewById(R.id.group_frag_record_gv);
-        addMemberBt = view.findViewById(R.id.group_btn_member_add);
+//        categoryEt =  view.findViewById(R.id.group_category_et);
+//        typeGv = view.findViewById(R.id.group_frag_record_gv);
+//        addMemberBt = view.findViewById(R.id.group_btn_member_add);
+
 
         backIB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,14 +85,43 @@ public class CreateNewGroupFragment extends Fragment{
         });
 
         saveTv.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                //Save data to database and go back
+                //Click Save button
+                // save data to database and go back
+                String groupTitle1 = titleEt.getText().toString();
+                if(TextUtils.isEmpty(groupTitle1)){
 
+                 Toast.makeText(getContext(), "Group Title Can Not Be Empty!", Toast.LENGTH_SHORT).show();
+
+
+                }else{
+
+                    saveGroupToDB();
+
+                    getActivity().finish();
+                }
 
             }
         });
 
+    }
+
+    //save the group info to database
+    private void saveGroupToDB() {
+
+        String groupTitle = titleEt.getText().toString();
+        String description = descriptionEt.getText().toString();
+
+        groupBean.setGrouptitle(groupTitle);
+        groupBean.setDescription(description);
+
+        groupBean.setCurrency("MYR");
+        groupBean.setCategory("others");
+
+
+        DBManager.insertInfoToGrouptb(groupBean);
     }
 
 

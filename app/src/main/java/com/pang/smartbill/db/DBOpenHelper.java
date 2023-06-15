@@ -25,10 +25,21 @@ public class DBOpenHelper extends SQLiteOpenHelper {
                 "time varchar(60),year integer,month integer,day integer,kind integer)";
         db.execSQL(sql);
 
-        sql = "create table groupinfo(id integer primary key autoincrement,grouptitle varchar(80),sImageId integer,groupdescription varchar(100),currency varchar(80)," +
-                "category varchar(50),groupmember varchar(50))";
+//        sql = "create table categorytb(id integer primary key autoincrement,categoryname varchar(10),imageId integer,sImageId integer)";
+//        db.execSQL(sql);
+//        insertCategory(db);
+
+
+        sql = "create table grouptb(id integer primary key autoincrement,grouptitle varchar(20),description varchar(80),currency varchar(20)," +
+                "category varchar(50))";
+
         db.execSQL(sql);
+        sql = "create table membertb(member_id integer primary key autoincrement,member_name varchar(20), group_id integer, FOREIGN KEY (group_id) REFERENCES grouptb(id))";
+        db.execSQL(sql);
+
     }
+
+
 
     private void insertType(SQLiteDatabase db) {
 //      typetb
@@ -58,9 +69,21 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         db.execSQL(sql,new Object[]{"investment", R.mipmap.in_touzi,R.mipmap.in_touzi_fs,1});
         db.execSQL(sql,new Object[]{"transaction", R.mipmap.in_ershoushebei,R.mipmap.in_ershoushebei_fs,1});
         db.execSQL(sql,new Object[]{"Windfall", R.mipmap.in_yiwai,R.mipmap.in_yiwai_fs,1});
+
+
     }
 
+//    private void insertCategory(SQLiteDatabase db) {
+//        //group category
+//        String sql = "insert into category (categoryname,imageId,sImageId) values (?,?,?)";
+//        db.execSQL(sql,new Object[]{"others", R.drawable.group_category_others,R.drawable.group_category_others_sd});
+//        db.execSQL(sql,new Object[]{"trip", R.drawable.group_category_trip,R.drawable.group_category_trip_sd});
+//        db.execSQL(sql,new Object[]{"shared house", R.drawable.group_category_shared_house,R.drawable.group_category_shared_house_sd});
+//
+//    }
 
+
+    //when database upgrade or change will call this function
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 

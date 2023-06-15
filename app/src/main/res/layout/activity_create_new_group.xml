@@ -9,16 +9,17 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/blue_700"
         android:padding="10dp">
 
         <ImageView
             android:id="@+id/group_record_iv_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
             android:src="@drawable/baseline_arrow_back_24"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="0dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:onClick="onClick"
             android:layout_marginLeft="10dp"/>
 
@@ -37,12 +38,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="@color/blue_700"
             android:text="Save"
             android:textAllCaps="false"
             android:textSize="15sp"
             android:textStyle="bold"
-            android:textColor="@color/blue_700" />
+            android:textColor="@color/white" />
     </RelativeLayout>
 
     <EditText
@@ -67,32 +68,44 @@
         android:importantForAutofill="no"
         android:inputType="text" />
 
-    <TextView
-        android:id="@+id/group_category_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="20dp"
-        android:text="Category"
-        android:textColor="@color/black"
-        android:textSize="20sp" />
+<!--    <EditText-->
+<!--        android:id="@+id/group_category_et"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="10dp"-->
+<!--        android:layout_marginEnd="10dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:hint="Enter group Category"-->
+<!--        android:importantForAutofill="no"-->
+<!--        android:inputType="text" />-->
 
-    <GridView
-        android:id="@+id/group_frag_record_gv"
-        android:layout_width="match_parent"
-        android:layout_height="130dp"
-        android:layout_marginTop="5dp"
-        android:background="@color/white"
-        android:numColumns="4"
-        android:paddingTop="5dp"
-        android:paddingBottom="8dp" />
+
+    <!--    <TextView-->
+<!--        android:id="@+id/group_category_tv"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="10dp"-->
+<!--        android:layout_marginEnd="10dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:text="Category"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="20sp" />-->
+
+<!--    <GridView-->
+<!--        android:id="@+id/group_frag_record_gv"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="130dp"-->
+<!--        android:layout_marginTop="5dp"-->
+<!--        android:background="@color/white"-->
+<!--        android:numColumns="4"-->
+<!--        android:paddingTop="5dp"-->
+<!--        android:paddingBottom="8dp" />-->
 
     <View
         android:id="@+id/group_view_line"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:background="@color/grey_7D7D7D" />
 
     <TextView

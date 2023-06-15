@@ -1,6 +1,5 @@
 package com.pang.smartbill.db;
 
-import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -9,12 +8,12 @@ import android.util.Log;
 
 import com.pang.smartbill.ui.FloatUtils;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 /*
  * The class responsible for managing the database
+ * main operate the context of table, add, delete, edit and view
  * */
 public class DBManager {
 
@@ -44,6 +43,10 @@ public class DBManager {
             TypeBean typeBean = new TypeBean(id, typename, imageId, sImageId, kind);
             list.add(typeBean);
         }
+
+
+
+
         return list;
     }
 
@@ -64,6 +67,61 @@ public class DBManager {
         db.insert("accounttb",null,values);
 
     }
+
+    // insert new group info
+    public static void insertInfoToGrouptb(GroupBean bean){
+        ContentValues values = new ContentValues();
+        values.put("grouptitle",bean.getGrouptitle());
+        values.put("description",bean.getDescription());
+        values.put("currency",bean.getCurrency());
+        values.put("category",bean.getCategory());
+        db.insert("grouptb",null,values);
+        Log.i("animee","insertInfoToGrouptb: okay!!!");
+
+    }
+
+    //get group info
+    public static List<GroupBean>getInfoFromGrouptb(){
+        List<GroupBean>list = new ArrayList<>();
+
+        String sql = "select * from grouptb order by id desc";
+        Cursor cursor = db.rawQuery(sql, new String[]{});
+        //traverse data
+        while (cursor.moveToNext()) {
+            int id = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
+            String grouptitle = cursor.getString(cursor.getColumnIndexOrThrow("grouptitle"));
+            String description= cursor.getString(cursor.getColumnIndexOrThrow("description"));
+            String currency = cursor.getString(cursor.getColumnIndexOrThrow("currency"));
+            String category= cursor.getString(cursor.getColumnIndexOrThrow("category"));
+
+            GroupBean groupBean = new GroupBean(id, grouptitle, description,currency,category);
+            list.add(groupBean);
+        }
+
+
+        return list;
+    }
+
+
+//      get group category
+//    public static List<CategoryBean>getCategory(){
+//        List<CategoryBean>list = new ArrayList<>();
+//        //read group category
+//        String sql = "select * from categorytb";
+//        Cursor cursor = db.rawQuery(sql, null);
+//        //The contents of the cursor are read and stored in the object
+//        while (cursor.moveToNext()) {
+//            String categoryname = cursor.getString(cursor.getColumnIndexOrThrow("categoryname"));
+//            int imageId = cursor.getInt(cursor.getColumnIndexOrThrow("imageId"));
+//            int sImageId = cursor.getInt(cursor.getColumnIndexOrThrow("sImageId"));
+//            int id = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
+//            CategoryBean categoryBean = new CategoryBean(id, categoryname, imageId, sImageId);
+//            list.add(categoryBean);
+//        }
+//        return list;
+//    }
+
+
     /*
      *  get income/expense information from one day
      * */
