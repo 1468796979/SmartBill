@@ -76,13 +76,31 @@ public class DBManager {
         values.put("currency",bean.getCurrency());
         values.put("category",bean.getCategory());
         db.insert("grouptb",null,values);
-        Log.i("animee","insertInfoToGrouptb: okay!!!");
-
     }
 
+    public static void updateInfoToGrouptb(GroupBean bean){
+        ContentValues values = new ContentValues();
+        values.put("grouptitle",bean.getGrouptitle());
+        values.put("description",bean.getDescription());
+        values.put("currency",bean.getCurrency());
+        values.put("category",bean.getCategory());
+        String whereClause = "id = ?";
+        String[] whereArgs = {String.valueOf(bean.getId())};
+
+        db.update("grouptb", values, whereClause, whereArgs);
+    }
+
+    public static void insertInfoToMembertb(MemberBean bean){
+        ContentValues values = new ContentValues();
+        values.put("member_id",bean.getMemberId());
+        values.put("member_name",bean.getMemberName());
+        values.put("group_id",bean.getGroupId());
+        db.insert("membertb",null,values);
+    }
     //get group info
     public static List<GroupBean>getInfoFromGrouptb(){
         List<GroupBean>list = new ArrayList<>();
+        List<MemberBean>memberBeanList = new ArrayList<>();
 
         String sql = "select * from grouptb order by id desc";
         Cursor cursor = db.rawQuery(sql, new String[]{});
@@ -94,7 +112,8 @@ public class DBManager {
             String currency = cursor.getString(cursor.getColumnIndexOrThrow("currency"));
             String category= cursor.getString(cursor.getColumnIndexOrThrow("category"));
 
-            GroupBean groupBean = new GroupBean(id, grouptitle, description,currency,category);
+
+            GroupBean groupBean = new GroupBean(id, grouptitle, description,currency,category);//,memberBeanList
             list.add(groupBean);
         }
 
@@ -250,7 +269,7 @@ public class DBManager {
     }
 
     /**
-     * 查询记账的表当中有几个年份信息
+     * Check how many years are in the account table
      * */
     public static List<Integer>getYearListFromAccounttb(){
         List<Integer>list = new ArrayList<>();
@@ -270,6 +289,7 @@ public class DBManager {
         String sql = "delete from accounttb";
         db.execSQL(sql);
     }
+
 
 
     public static List<ChartItemBean>getChartListFromAccounttb(int year,int month,int kind){

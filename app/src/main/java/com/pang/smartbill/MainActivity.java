@@ -154,8 +154,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void onClick(DialogInterface dialog, int which) {
                         int click_id = clickBean.getId();
 
-//                        DBManager.deleteItemFromAccounttbById(click_id);
-//                        mDatas.remove(clickBean);
 
                        adapter.notifyDataSetChanged();
                         setTopTvShow();
@@ -252,29 +250,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent it2 = new Intent(this, HistoryActivity.class);
             startActivity(it2);
         }
-//
-//        switch (v.getId()) {
-//            case R.id.person_iv_search:
-//                Intent it = new Intent(this, SearchActivity.class);
-//                startActivity(it);
-//                break;
-//            case R.id.main_btn_edit:
-//                Intent it1 = new Intent(this, RecordActivity.class);
-//                startActivity(it1);
-//                break;
-//            case R.id.main_btn_more:
-//                MoreDialog moreDialog = new MoreDialog(this);
-//                moreDialog.show();
-//                moreDialog.setDialogSize();
-//                break;
-//            case R.id.item_mainlv_top_tv_budget:
-//                showBudgetDialog();
-//                break;
-//            case R.id.item_mainlv_top_iv_hide:
-//
-//                toggleShow();
-//                break;
-//        }
+
 
         if (v == headerView) {
 
@@ -303,23 +279,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
-//    boolean isShow = true;
-//
-//    private void toggleShow() {
-//        if (isShow) {
-//            PasswordTransformationMethod passwordMethod = PasswordTransformationMethod.getInstance();
-//            topInTv.setTransformationMethod(passwordMethod);
-//            topOutTv.setTransformationMethod(passwordMethod);
-//            topbudgetTv.setTransformationMethod(passwordMethod);
-//            topShowIv.setImageResource(R.mipmap.ih_hide);
-//            isShow = false;
-//        }else{
-//            HideReturnsTransformationMethod hideMethod = HideReturnsTransformationMethod.getInstance();
-//            topInTv.setTransformationMethod(hideMethod);
-//            topOutTv.setTransformationMethod(hideMethod);
-//            topbudgetTv.setTransformationMethod(hideMethod);
-//            topShowIv.setImageResource(R.mipmap.ih_show);
-//            isShow = true;
-//        }
-//    }
 }

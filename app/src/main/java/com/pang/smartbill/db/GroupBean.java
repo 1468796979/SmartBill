@@ -1,7 +1,11 @@
 package com.pang.smartbill.db;
+
+
+import java.util.List;
+
 /** Describes record the content group of data*/
 public class GroupBean {
-    int id;
+    long id;
     String grouptitle;   //type
 //    int sImageId;   //Selected type image
     String description;
@@ -11,15 +15,15 @@ public class GroupBean {
 
 
 
-    String groupmember;
+    List<MemberBean> members;
 
 
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -57,13 +61,7 @@ public class GroupBean {
     }
 
 
-//    public String getGroupmember() {
-//        return groupmember;
-//    }
-//
-//        public void setGroupmember(String groupmember) {
-//        this.groupmember= groupmember;
-//    }
+
 
 
 
@@ -71,13 +69,15 @@ public class GroupBean {
     public GroupBean() {
     }
 
-    public GroupBean(int id, String grouptitle, String description,String currency, String category) {
+    public GroupBean(long id, String grouptitle, String description,String currency, String category) {
+        //,List<MemberBean> members
         this.id = id;
         this.grouptitle = grouptitle;
 
         this.description= description;
         this.currency= currency;
         this.category= category;
+//        this.members = members;
 
      //   this.groupmember = groupmember;
 

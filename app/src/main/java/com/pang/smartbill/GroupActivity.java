@@ -10,6 +10,7 @@ import com.pang.smartbill.group.CreateNewGroupActivity;
 import com.pang.smartbill.group.adapter.GroupAdapter;
 import com.pang.smartbill.group.frag_group_record.CreateNewGroupFragment;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.content.Intent;
 import android.view.View;
@@ -57,11 +58,16 @@ public class GroupActivity extends AppCompatActivity  implements View.OnClickLis
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 GroupBean groupBean = (GroupBean) parent.getItemAtPosition(position);
-                Intent intent = new Intent(GroupActivity.this, CreateNewGroupActivity.class);
-                intent.putExtra("id", groupBean.getId());
-                intent.putExtra("grouptitle", groupBean.getGrouptitle());
-                intent.putExtra("description", groupBean.getDescription());
-                startActivityForResult(intent, 1);
+                Intent intent1 = new Intent(GroupActivity.this, EditGroupActivity.class);
+                Long group_id = groupBean.getId();
+                String groupTitile = groupBean.getGrouptitle();
+                String description = groupBean.getDescription();
+                intent1.putExtra("id",group_id);
+                intent1.putExtra("grouptitle", groupTitile);
+                intent1.putExtra("description", description);
+                startActivity(intent1);
+
+
             }
         });
 

@@ -22,6 +22,7 @@ import com.pang.smartbill.R;
 import com.pang.smartbill.db.AccountBean;
 import com.pang.smartbill.db.DBManager;
 import com.pang.smartbill.db.GroupBean;
+import com.pang.smartbill.db.GroupDatabase;
 import com.pang.smartbill.db.TypeBean;
 import com.pang.smartbill.ui.KeyBoardUtils;
 import com.pang.smartbill.ui.NoteDialog;
