@@ -39,22 +39,25 @@ public class AddEditMemberActivity extends AppCompatActivity {
 //        id = getIntent().getExtras().getInt("id");
 
 
+        groupBean = new GroupBean();
+        memberBean = new MemberBean();
 
 
 
-        String addM = memberNameEt.getText().toString().trim();
 
 
 
             addMemberBt.setOnClickListener(new View.OnClickListener() {
+
                 @Override
                 public void onClick(View v) {
+                    String addM = memberNameEt.getText().toString();
 
                     if(TextUtils.isEmpty(addM)){
 
                         Toast.makeText(getApplicationContext(),"Name can not be empty!", Toast.LENGTH_LONG).show();
-                    }{
-//                    saveMemberToDB();
+                    }else {
+                    saveMemberToDB();
 
                     finish();
                     }
