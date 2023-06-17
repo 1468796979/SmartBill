@@ -4,12 +4,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.pang.smartbill.db.AccountBean;
 import com.pang.smartbill.db.DBManager;
 import com.pang.smartbill.db.GroupBean;
 import com.pang.smartbill.group.CreateNewGroupActivity;
 import com.pang.smartbill.group.adapter.GroupAdapter;
 import com.pang.smartbill.group.frag_group_record.CreateNewGroupFragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.content.Intent;
@@ -55,11 +58,13 @@ public class GroupActivity extends AppCompatActivity  implements View.OnClickLis
         ListView groupLv1 = findViewById(R.id.group_lv);
 
         groupLv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                 GroupBean groupBean = (GroupBean) parent.getItemAtPosition(position);
                 Intent intent1 = new Intent(GroupActivity.this, EditGroupActivity.class);
-                Long group_id = groupBean.getId();
+                long group_id = groupBean.getId();
                 String groupTitile = groupBean.getGrouptitle();
                 String description = groupBean.getDescription();
                 intent1.putExtra("id",group_id);
@@ -68,8 +73,11 @@ public class GroupActivity extends AppCompatActivity  implements View.OnClickLis
                 startActivity(intent1);
 
 
+
             }
         });
+
+        setLVLongClickListener();
 
 
 
@@ -132,10 +140,83 @@ public class GroupActivity extends AppCompatActivity  implements View.OnClickLis
 
     }
 
+
+    private void setLVLongClickListener() {
+        groupLv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 0) {
+                    return false;
+                }
+                int pos = position-1;
+                GroupBean clickBean = mDatas.get(pos+1);
+
+
+                showDeleteItemDialog(clickBean);
+                return false;
+            }
+        });
+    }
+
+    private void showDeleteItemDialog(final GroupBean clickBean) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("prompt ").setMessage("Choose the options:")
+
+                .setNegativeButton("View", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        Intent intent1 = new Intent(GroupActivity.this, EditGroupActivity.class);
+                        long group_id = clickBean.getId();
+                        String groupTitile = clickBean.getGrouptitle();
+                        String description = clickBean.getDescription();
+                        intent1.putExtra("id",group_id);
+                        intent1.putExtra("grouptitle", groupTitile);
+                        intent1.putExtra("description", description);
+                        startActivity(intent1);
+
+                        adapter.notifyDataSetChanged();
+                    }
+                })
+
+                .setNeutralButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        long click_id = clickBean.getId();
+
+                        DBManager.deleteItemFromGrouptbById(click_id);
+                        mDatas.remove(clickBean);
+                        adapter.notifyDataSetChanged();
+
+                    }
+                })
+                .setPositiveButton("Edit", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+
+                        Intent intent1 = new Intent(GroupActivity.this, EditGroupActivity.class);
+                        long group_id = clickBean.getId();
+                        String groupTitile = clickBean.getGrouptitle();
+                        String description = clickBean.getDescription();
+                        intent1.putExtra("id",group_id);
+                        intent1.putExtra("grouptitle", groupTitile);
+                        intent1.putExtra("description", description);
+                        startActivity(intent1);
+
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+        builder.create().show();
+    }
+
     private void loadDBData() {
         List<GroupBean> list = DBManager.getInfoFromGrouptb();
         mDatas.clear();
         mDatas.addAll(list);
         adapter.notifyDataSetChanged();
     }
+
+
 }

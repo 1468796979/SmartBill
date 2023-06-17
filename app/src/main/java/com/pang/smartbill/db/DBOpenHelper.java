@@ -36,8 +36,8 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         db.execSQL(sql);
         sql = "create table membertb(member_id integer primary key autoincrement,member_name varchar(20), group_id integer, FOREIGN KEY (group_id) REFERENCES grouptb(id))";
         db.execSQL(sql);
-        sql = "create table group_amounttb(amount_id integer primary key autoincrement,amount_title varchar(20),amount float,time varchar(60),year integer,month integer,day integer,kind integer," +
-                " group_id integer, FOREIGN KEY (group_id) REFERENCES grouptb(id))";
+
+        sql = "create table group_billtb(bill_id integer primary key autoincrement,bill_title varchar(20),amount double, paidBy varchar(20))";
         db.execSQL(sql);
 
     }

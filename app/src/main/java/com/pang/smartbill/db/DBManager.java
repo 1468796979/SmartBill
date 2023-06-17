@@ -88,13 +88,13 @@ public class DBManager {
         String[] whereArgs = {String.valueOf(bean.getId())};
 
         db.update("grouptb", values, whereClause, whereArgs);
+
     }
 
     public static void insertInfoToMembertb(MemberBean bean){
         ContentValues values = new ContentValues();
-        values.put("member_id",bean.getMemberId());
         values.put("member_name",bean.getMemberName());
-        values.put("group_id",bean.getGroupId());
+        values.put("group_id",bean.getMemberGroupId());
         db.insert("membertb",null,values);
     }
     //get group info
@@ -115,30 +115,34 @@ public class DBManager {
 
             GroupBean groupBean = new GroupBean(id, grouptitle, description,currency,category);//,memberBeanList
             list.add(groupBean);
+
         }
 
 
         return list;
     }
 
+    public static List<MemberBean>getInfoFromMembertb(){
+        List<GroupBean>list = new ArrayList<>();
+        List<MemberBean>memberBeanList = new ArrayList<>();
 
-//      get group category
-//    public static List<CategoryBean>getCategory(){
-//        List<CategoryBean>list = new ArrayList<>();
-//        //read group category
-//        String sql = "select * from categorytb";
-//        Cursor cursor = db.rawQuery(sql, null);
-//        //The contents of the cursor are read and stored in the object
-//        while (cursor.moveToNext()) {
-//            String categoryname = cursor.getString(cursor.getColumnIndexOrThrow("categoryname"));
-//            int imageId = cursor.getInt(cursor.getColumnIndexOrThrow("imageId"));
-//            int sImageId = cursor.getInt(cursor.getColumnIndexOrThrow("sImageId"));
-//            int id = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
-//            CategoryBean categoryBean = new CategoryBean(id, categoryname, imageId, sImageId);
-//            list.add(categoryBean);
-//        }
-//        return list;
-//    }
+        String sql = "select * from membertb order by member_id desc";
+        Cursor cursor = db.rawQuery(sql, new String[]{});
+        //traverse data
+        while (cursor.moveToNext()) {
+            int member_id = cursor.getInt(cursor.getColumnIndexOrThrow("member_id"));
+            String member_name = cursor.getString(cursor.getColumnIndexOrThrow("member_name"));
+            int group_id= cursor.getInt(cursor.getColumnIndexOrThrow("group_id"));
+
+            MemberBean memberBean = new MemberBean(member_id, member_name, group_id);//,memberBeanList
+            memberBeanList.add(memberBean);
+            db.close();
+        }
+
+
+        return memberBeanList;
+    }
+
 
 
     /*
@@ -160,6 +164,7 @@ public class DBManager {
             AccountBean accountBean = new AccountBean(id, typename, sImageId, note, money, time, year, month, day, kind);
             list.add(accountBean);
         }
+
         return list;
     }
 
@@ -242,6 +247,11 @@ public class DBManager {
      * */
     public static int deleteItemFromAccounttbById(int id){
         int i = db.delete("accounttb", "id=?", new String[]{id + ""});
+        return i;
+    }
+
+    public static Long deleteItemFromGrouptbById(Long id){
+        long i = db.delete("grouptb", "id=?", new String[]{id + ""});
         return i;
     }
     /**

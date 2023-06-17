@@ -2,19 +2,24 @@ package com.pang.smartbill;
 
 
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.pang.smartbill.db.DBManager;
 import com.pang.smartbill.db.GroupBean;
-import com.pang.smartbill.db.GroupDatabase;
+import com.pang.smartbill.db.MemberBean;
+import com.pang.smartbill.group.adapter.GroupAdapter;
+import com.pang.smartbill.group.adapter.MemberAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class EditGroupActivity extends AppCompatActivity  implements View.OnClickListener{
     private EditText titleEditText;
@@ -28,16 +33,31 @@ public class EditGroupActivity extends AppCompatActivity  implements View.OnClic
 
     private ImageView backIB;
     Long id;
+    ListView memberLv;
+    List<MemberBean> mDatas;
+    private MemberAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_group);
 
+        mDatas = new ArrayList<>();
+
+        adapter = new MemberAdapter(this,mDatas);
+
+
+        memberLv = findViewById(R.id.group_edit_add_member_lv);
+        backIB = findViewById(R.id.group_edit_record_iv_back);
+        updateGroupButton = findViewById(R.id.group_edit_save_bt);
+        addMemberBt = findViewById(R.id.group_edit_btn_member_add);
+        memberLv.setAdapter(adapter);
+
 
 
         // Retrieve the Group object from the intent
         groupBean = getIntent().getParcelableExtra("grouptb");
+
 
         id = getIntent().getExtras().getLong("id");
         String grouptitle = getIntent().getExtras().getString("grouptitle");
@@ -57,10 +77,22 @@ public class EditGroupActivity extends AppCompatActivity  implements View.OnClic
         titleEditText.setText(grouptitle);
         descriptionEditText.setText(description);
 
+        addMemberBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
 
-        backIB = findViewById(R.id.group_edit_record_iv_back);
-        updateGroupButton = findViewById(R.id.group_edit_save_bt);
+                Intent intent1 = new Intent(EditGroupActivity.this, AddEditMemberActivity.class);
+//                intent1.putExtra("id",id);
+                startActivity(intent1);
+
+
+            }
+        });
+
+
+
+
 
 
 
@@ -76,11 +108,13 @@ public class EditGroupActivity extends AppCompatActivity  implements View.OnClic
 
 
                 // Update the Group object with the updated details
-                GroupBean groupBean1 = new GroupBean();
-                groupBean1.setGrouptitle(updatedTitle);
-                groupBean1.setDescription(updatedDescription);
 
-                DBManager.insertInfoToGrouptb(groupBean1);
+                groupBean.setGrouptitle(updatedTitle);
+                groupBean.setDescription(updatedDescription);
+                groupBean.setCurrency("MYR");
+                groupBean.setCategory("others");
+
+                DBManager.updateInfoToGrouptb(groupBean);
 
                 finish();
             }
@@ -94,27 +128,14 @@ public class EditGroupActivity extends AppCompatActivity  implements View.OnClic
             }
         });
 
-
-
-
-
-
-        // Delete group button click listener
-//        deleteGroupButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // Delete the group from the database or perform any necessary operations
-//
-//                // Finish the activity and go back to the previous screen
-//                finish();
-//            }
-//        });
     }
 
     @Override
     public void onClick(View v) {
 
     }
+
+
 
 
 }

@@ -1,38 +1,21 @@
 package com.pang.smartbill.group.frag_group_record;
 
-import android.inputmethodservice.KeyboardView;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.GridView;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.pang.smartbill.R;
-import com.pang.smartbill.db.AccountBean;
 import com.pang.smartbill.db.DBManager;
 import com.pang.smartbill.db.GroupBean;
-import com.pang.smartbill.db.GroupDatabase;
-import com.pang.smartbill.db.TypeBean;
-import com.pang.smartbill.ui.KeyBoardUtils;
-import com.pang.smartbill.ui.NoteDialog;
-import com.pang.smartbill.ui.SelectTimeDialog;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 
 public class CreateNewGroupFragment extends Fragment{
 

@@ -29,11 +29,11 @@ public class MemberBean {
     }
 
 
-    public int getGroupId() {
+    public int getMemberGroupId() {
         return group_id;
     }
 
-    public void setGroupId(int group_id) {
+    public void setMemberGroupId(int group_id) {
         this.group_id = group_id;
     }
 
