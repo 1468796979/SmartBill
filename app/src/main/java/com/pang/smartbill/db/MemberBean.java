@@ -7,7 +7,7 @@ public class MemberBean {
     private int member_Id;
     private String member_name;
 
-    private int group_id;
+    private long group_id;
     private double amountOwed;
 
 
@@ -29,11 +29,11 @@ public class MemberBean {
     }
 
 
-    public int getMemberGroupId() {
+    public long getMemberGroupId() {
         return group_id;
     }
 
-    public void setMemberGroupId(int group_id) {
+    public void setMemberGroupId(long group_id) {
         this.group_id = group_id;
     }
 
@@ -41,7 +41,7 @@ public class MemberBean {
     public MemberBean() {
     }
 
-    public MemberBean(int member_Id, String member_name, int group_id) {
+    public MemberBean(int member_Id, String member_name, long group_id) {
         this.member_Id = member_Id;
         this.member_name = member_name;
 

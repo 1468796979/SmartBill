@@ -132,7 +132,7 @@ public class DBManager {
         while (cursor.moveToNext()) {
             int member_id = cursor.getInt(cursor.getColumnIndexOrThrow("member_id"));
             String member_name = cursor.getString(cursor.getColumnIndexOrThrow("member_name"));
-            int group_id= cursor.getInt(cursor.getColumnIndexOrThrow("group_id"));
+            long group_id= cursor.getLong(cursor.getColumnIndexOrThrow("group_id"));
 
             MemberBean memberBean = new MemberBean(member_id, member_name, group_id);//,memberBeanList
             memberBeanList.add(memberBean);

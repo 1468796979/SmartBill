@@ -23,7 +23,7 @@ public class AddEditMemberActivity extends AppCompatActivity {
 
     private GroupBean groupBean;
     private MemberBean memberBean;
-    int  id;
+    Long  groupId;
     int memberId;
 
 
@@ -37,7 +37,13 @@ public class AddEditMemberActivity extends AppCompatActivity {
         backBt = findViewById(R.id.member_record_iv_back);
 
         groupBean = getIntent().getParcelableExtra("grouptb");
-        id = getIntent().getExtras().getInt("id");
+
+
+        groupId = getIntent().getExtras().getLong("id");
+
+//        Toast.makeText(getApplicationContext(),"group id:"+groupId, Toast.LENGTH_LONG).show();
+
+
 
 //        memberBean =  getIntent().getParcelableExtra("membertb");
 //        memberId = getIntent().getExtras().getInt("member_id");
@@ -83,7 +89,7 @@ public class AddEditMemberActivity extends AppCompatActivity {
         String memberName = memberNameEt.getText().toString();
 
         memberBean.setMemberName(memberName);
-        memberBean.setMemberGroupId(id);
+       memberBean.setMemberGroupId(groupId);
 
         DBManager.insertInfoToMembertb(memberBean);
     }

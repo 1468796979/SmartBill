@@ -5,6 +5,7 @@ package com.pang.smartbill;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -36,7 +37,7 @@ public class EditGroupActivity extends AppCompatActivity  implements View.OnClic
     private Button saveTv,addMemberBt;
     private MemberBean memberBean;
     private ImageView backIB;
-    Long group_id;
+    long group_id;
     ListView memberLv;
     List<MemberBean> mDatas;
     private MemberAdapter adapter;
@@ -73,7 +74,7 @@ public class EditGroupActivity extends AppCompatActivity  implements View.OnClic
         String description = getIntent().getExtras().getString("description");
 
         String groupIdString = String.valueOf(group_id);
-        Toast.makeText(getApplicationContext(),"group id:"+ groupIdString, Toast.LENGTH_LONG).show();
+//        Toast.makeText(getApplicationContext(),"group id:"+ groupIdString, Toast.LENGTH_LONG).show();
 
 
 
@@ -98,18 +99,19 @@ public class EditGroupActivity extends AppCompatActivity  implements View.OnClic
         descriptionEditText.setText(description);
 
         addMemberBt.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
 
 
                 Intent intent1 = new Intent(EditGroupActivity.this, AddEditMemberActivity.class);
+                long group_id = groupBean.getId();
                  intent1.putExtra("id",group_id);
                 startActivity(intent1);
 
 
             }
         });
-
 
 
 
@@ -201,10 +203,16 @@ public class EditGroupActivity extends AppCompatActivity  implements View.OnClic
         List<MemberBean> list = DBManager.getInfoFromMembertb();
         mDatas.clear();
 //        mDatas.addAll(list);
-//
+
+
+//        Toast.makeText(getApplicationContext(),"group id:", Toast.LENGTH_LONG).show();
+
         for (MemberBean member : list) {
+           int id= member.getMemberId();
+//           Toast.makeText(getApplicationContext(),"group id:"+ id, Toast.LENGTH_LONG).show();
             if (member.getMemberId() == group_id) {
                 mDatas.add(member);
+
             }
         }
         adapter.notifyDataSetChanged();
