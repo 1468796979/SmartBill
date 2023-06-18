@@ -41,14 +41,6 @@ public class AddEditMemberActivity extends AppCompatActivity {
 
         groupId = getIntent().getExtras().getLong("id");
 
-//        Toast.makeText(getApplicationContext(),"group id:"+groupId, Toast.LENGTH_LONG).show();
-
-
-
-//        memberBean =  getIntent().getParcelableExtra("membertb");
-//        memberId = getIntent().getExtras().getInt("member_id");
-
-//        groupBean = new GroupBean();
         memberBean = new MemberBean();
 
 

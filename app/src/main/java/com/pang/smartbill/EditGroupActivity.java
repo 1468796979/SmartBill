@@ -58,13 +58,6 @@ public class EditGroupActivity extends AppCompatActivity  implements View.OnClic
 
         adapter = new MemberAdapter(this,mDatas);
 
-
-
-//        long group_id = groupBean.getId();
-
-
-
-
         // Retrieve the Group object from the intent
         groupBean = getIntent().getParcelableExtra("grouptb");
 
@@ -74,15 +67,9 @@ public class EditGroupActivity extends AppCompatActivity  implements View.OnClic
         String description = getIntent().getExtras().getString("description");
 
         String groupIdString = String.valueOf(group_id);
-//        Toast.makeText(getApplicationContext(),"group id:"+ groupIdString, Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),"group id:"+ groupIdString, Toast.LENGTH_LONG).show();
 
-
-
-            memberLv.setAdapter(adapter);
-
-
-
-
+        memberLv.setAdapter(adapter);
 
         // Initialize views
         titleEditText = findViewById(R.id.group_edit_title_et);
@@ -130,7 +117,6 @@ public class EditGroupActivity extends AppCompatActivity  implements View.OnClic
 
 
                 // Update the Group object with the updated details
-
                 groupBean.setGrouptitle(updatedTitle);
                 groupBean.setDescription(updatedDescription);
                 groupBean.setCurrency("MYR");
@@ -202,15 +188,9 @@ public class EditGroupActivity extends AppCompatActivity  implements View.OnClic
     private void loadDBData() {
         List<MemberBean> list = DBManager.getInfoFromMembertb();
         mDatas.clear();
-//        mDatas.addAll(list);
-
-
-//        Toast.makeText(getApplicationContext(),"group id:", Toast.LENGTH_LONG).show();
-
         for (MemberBean member : list) {
-           int id= member.getMemberId();
-//           Toast.makeText(getApplicationContext(),"group id:"+ id, Toast.LENGTH_LONG).show();
-            if (member.getMemberId() == group_id) {
+
+            if (member.getMemberGroupId() == group_id) {
                 mDatas.add(member);
 
             }
