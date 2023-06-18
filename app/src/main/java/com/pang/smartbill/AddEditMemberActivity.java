@@ -38,7 +38,6 @@ public class AddEditMemberActivity extends AppCompatActivity {
 
         groupBean = getIntent().getParcelableExtra("grouptb");
 
-
         groupId = getIntent().getExtras().getLong("id");
 
         memberBean = new MemberBean();

@@ -125,7 +125,7 @@ public class GroupActivity extends AppCompatActivity  implements View.OnClickLis
         int viewId =view.getId();
         if(viewId == R.id.group_main_btn_add){
 
-            Intent it3 = new Intent(this, CreateNewGroupActivity.class);
+            Intent it3 = new Intent(this, EditGroupActivity.class);
             startActivity(it3);
 
         }

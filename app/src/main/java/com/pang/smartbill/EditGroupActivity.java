@@ -58,6 +58,13 @@ public class EditGroupActivity extends AppCompatActivity  implements View.OnClic
 
         adapter = new MemberAdapter(this,mDatas);
 
+
+
+//        long group_id = groupBean.getId();
+
+
+
+
         // Retrieve the Group object from the intent
         groupBean = getIntent().getParcelableExtra("grouptb");
 
@@ -117,6 +124,7 @@ public class EditGroupActivity extends AppCompatActivity  implements View.OnClic
 
 
                 // Update the Group object with the updated details
+
                 groupBean.setGrouptitle(updatedTitle);
                 groupBean.setDescription(updatedDescription);
                 groupBean.setCurrency("MYR");
@@ -188,6 +196,8 @@ public class EditGroupActivity extends AppCompatActivity  implements View.OnClic
     private void loadDBData() {
         List<MemberBean> list = DBManager.getInfoFromMembertb();
         mDatas.clear();
+
+
         for (MemberBean member : list) {
 
             if (member.getMemberGroupId() == group_id) {
