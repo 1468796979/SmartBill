@@ -118,8 +118,8 @@ public class DBManager {
 
         }
 
-
         return list;
+
     }
 
     public static List<MemberBean>getInfoFromMembertb(){
@@ -136,12 +136,14 @@ public class DBManager {
 
             MemberBean memberBean = new MemberBean(member_id, member_name, group_id);//,memberBeanList
             memberBeanList.add(memberBean);
-            db.close();
+
         }
 
 
         return memberBeanList;
     }
+
+
 
 
 
@@ -252,6 +254,11 @@ public class DBManager {
 
     public static Long deleteItemFromGrouptbById(Long id){
         long i = db.delete("grouptb", "id=?", new String[]{id + ""});
+        return i;
+    }
+
+    public static int deleteItemFromMembertbById(int id){
+        int i = db.delete("membertb", "member_id=?", new String[]{id + ""});
         return i;
     }
     /**

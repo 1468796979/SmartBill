@@ -85,6 +85,7 @@ public class CreateNewGroupFragment extends Fragment{
                     saveGroupToDB();
 
                     getActivity().finish();
+
                 }
 
             }

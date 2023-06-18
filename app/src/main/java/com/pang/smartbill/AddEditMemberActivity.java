@@ -24,6 +24,7 @@ public class AddEditMemberActivity extends AppCompatActivity {
     private GroupBean groupBean;
     private MemberBean memberBean;
     int  id;
+    int memberId;
 
 
     @Override
@@ -35,16 +36,14 @@ public class AddEditMemberActivity extends AppCompatActivity {
         memberNameEt = findViewById(R.id.addMemberNameText);
         backBt = findViewById(R.id.member_record_iv_back);
 
-//        groupBean = getIntent().getParcelableExtra("grouptb");
-//        id = getIntent().getExtras().getInt("id");
+        groupBean = getIntent().getParcelableExtra("grouptb");
+        id = getIntent().getExtras().getInt("id");
 
+//        memberBean =  getIntent().getParcelableExtra("membertb");
+//        memberId = getIntent().getExtras().getInt("member_id");
 
-        groupBean = new GroupBean();
+//        groupBean = new GroupBean();
         memberBean = new MemberBean();
-
-
-
-
 
 
             addMemberBt.setOnClickListener(new View.OnClickListener() {
@@ -84,7 +83,7 @@ public class AddEditMemberActivity extends AppCompatActivity {
         String memberName = memberNameEt.getText().toString();
 
         memberBean.setMemberName(memberName);
-        memberBean.setMemberGroupId(1);
+        memberBean.setMemberGroupId(id);
 
         DBManager.insertInfoToMembertb(memberBean);
     }

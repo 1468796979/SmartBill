@@ -72,8 +72,6 @@ public class GroupActivity extends AppCompatActivity  implements View.OnClickLis
                 intent1.putExtra("description", description);
                 startActivity(intent1);
 
-
-
             }
         });
 
@@ -82,7 +80,7 @@ public class GroupActivity extends AppCompatActivity  implements View.OnClickLis
 
 
 
-
+        //Bottom Navigation
         bottomNavigationView.setOnItemSelectedListener(item -> {
 
             int itemId =item.getItemId();

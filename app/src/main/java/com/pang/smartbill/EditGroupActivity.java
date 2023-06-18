@@ -2,13 +2,17 @@ package com.pang.smartbill;
 
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -30,28 +34,33 @@ public class EditGroupActivity extends AppCompatActivity  implements View.OnClic
     private Button deleteGroupButton;
     private GroupBean groupBean;
     private Button saveTv,addMemberBt;
-
+    private MemberBean memberBean;
     private ImageView backIB;
-    Long id;
+    Long group_id;
     ListView memberLv;
     List<MemberBean> mDatas;
     private MemberAdapter adapter;
-
+    private int memberId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_group);
 
-        mDatas = new ArrayList<>();
-
-        adapter = new MemberAdapter(this,mDatas);
 
 
         memberLv = findViewById(R.id.group_edit_add_member_lv);
         backIB = findViewById(R.id.group_edit_record_iv_back);
         updateGroupButton = findViewById(R.id.group_edit_save_bt);
         addMemberBt = findViewById(R.id.group_edit_btn_member_add);
-        memberLv.setAdapter(adapter);
+
+        mDatas = new ArrayList<>();
+
+        adapter = new MemberAdapter(this,mDatas);
+
+
+
+//        long group_id = groupBean.getId();
+
 
 
 
@@ -59,9 +68,20 @@ public class EditGroupActivity extends AppCompatActivity  implements View.OnClic
         groupBean = getIntent().getParcelableExtra("grouptb");
 
 
-        id = getIntent().getExtras().getLong("id");
+        group_id = getIntent().getExtras().getLong("id");
         String grouptitle = getIntent().getExtras().getString("grouptitle");
         String description = getIntent().getExtras().getString("description");
+
+        String groupIdString = String.valueOf(group_id);
+        Toast.makeText(getApplicationContext(),"group id:"+ groupIdString, Toast.LENGTH_LONG).show();
+
+
+
+            memberLv.setAdapter(adapter);
+
+
+
+
 
         // Initialize views
         titleEditText = findViewById(R.id.group_edit_title_et);
@@ -69,7 +89,7 @@ public class EditGroupActivity extends AppCompatActivity  implements View.OnClic
 
         // Initialize the GroupBean object
         groupBean = new GroupBean();
-        groupBean.setId(id);
+        groupBean.setId(group_id);
         groupBean.setGrouptitle(grouptitle);
         groupBean.setDescription(description);
 
@@ -83,7 +103,7 @@ public class EditGroupActivity extends AppCompatActivity  implements View.OnClic
 
 
                 Intent intent1 = new Intent(EditGroupActivity.this, AddEditMemberActivity.class);
-//                intent1.putExtra("id",id);
+                 intent1.putExtra("id",group_id);
                 startActivity(intent1);
 
 
@@ -93,7 +113,7 @@ public class EditGroupActivity extends AppCompatActivity  implements View.OnClic
 
 
 
-
+        setLVLongClickListener();
 
 
         // Update group button click listener
@@ -130,11 +150,65 @@ public class EditGroupActivity extends AppCompatActivity  implements View.OnClic
 
     }
 
+    private void setLVLongClickListener() {
+        memberLv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+//                if (position == 0) {
+//                    return false;
+//                }
+                int pos = position;
+                MemberBean clickBean = mDatas.get(pos);
+
+
+                showDeleteItemDialog(clickBean);
+                return false;
+
+            }
+        });
+    }
+
+
+    private void showDeleteItemDialog(final  MemberBean clickBean) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("prompt ").setMessage("Are you sure you want to delete this record？")
+                .setNegativeButton("Cancel",null)
+                .setPositiveButton("Ensure", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        int click_id = clickBean.getMemberId();
+
+                        DBManager.deleteItemFromMembertbById(click_id);
+                        mDatas.remove(clickBean);
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+        builder.create().show();
+    }
+
     @Override
     public void onClick(View v) {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadDBData();
+
+    }
+    private void loadDBData() {
+        List<MemberBean> list = DBManager.getInfoFromMembertb();
+        mDatas.clear();
+//        mDatas.addAll(list);
+//
+        for (MemberBean member : list) {
+            if (member.getMemberId() == group_id) {
+                mDatas.add(member);
+            }
+        }
+        adapter.notifyDataSetChanged();
+    }
 
 
 

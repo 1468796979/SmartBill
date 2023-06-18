@@ -264,6 +264,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         BudgetDialog dialog = new BudgetDialog(this);
         dialog.show();
         dialog.setDialogSize();
+
         dialog.setOnEnsureListener(new BudgetDialog.OnEnsureListener() {
             @Override
             public void onEnsure(float money) {
