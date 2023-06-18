@@ -91,6 +91,26 @@ public class DBManager {
 
     }
 
+    public static long getLastGroupId() {
+        long lastGroupId = -1;
+
+        Cursor cursor = null;
+        try {
+            cursor = db.rawQuery("SELECT MAX(id) FROM grouptb", null);
+            if (cursor.moveToFirst()) {
+                lastGroupId = cursor.getLong(0);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return lastGroupId;
+    }
+
+
     public static void insertInfoToMembertb(MemberBean bean){
         ContentValues values = new ContentValues();
         values.put("member_name",bean.getMemberName());
@@ -252,7 +272,7 @@ public class DBManager {
         return i;
     }
 
-    public static Long deleteItemFromGrouptbById(Long id){
+    public static long deleteItemFromGrouptbById(long id){
         long i = db.delete("grouptb", "id=?", new String[]{id + ""});
         return i;
     }

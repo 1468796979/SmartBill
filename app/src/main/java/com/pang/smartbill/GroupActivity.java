@@ -1,31 +1,21 @@
 package com.pang.smartbill;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.pang.smartbill.db.AccountBean;
 import com.pang.smartbill.db.DBManager;
 import com.pang.smartbill.db.GroupBean;
-import com.pang.smartbill.group.CreateNewGroupActivity;
 import com.pang.smartbill.group.adapter.GroupAdapter;
-import com.pang.smartbill.group.frag_group_record.CreateNewGroupFragment;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageButton;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 public class GroupActivity extends AppCompatActivity  implements View.OnClickListener{
     ListView groupLv;
@@ -43,6 +33,8 @@ public class GroupActivity extends AppCompatActivity  implements View.OnClickLis
         groupLv = findViewById(R.id.group_lv);
 
 
+
+
         mDatas = new ArrayList<>();
 
         adapter = new GroupAdapter(this,mDatas);
@@ -57,23 +49,23 @@ public class GroupActivity extends AppCompatActivity  implements View.OnClickLis
 
         ListView groupLv1 = findViewById(R.id.group_lv);
 
-        groupLv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                GroupBean groupBean = (GroupBean) parent.getItemAtPosition(position);
-                Intent intent1 = new Intent(GroupActivity.this, EditGroupActivity.class);
-                long group_id = groupBean.getId();
-                String groupTitile = groupBean.getGrouptitle();
-                String description = groupBean.getDescription();
-                intent1.putExtra("id",group_id);
-                intent1.putExtra("grouptitle", groupTitile);
-                intent1.putExtra("description", description);
-                startActivity(intent1);
-
-            }
-        });
+//        groupLv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//
+//                GroupBean groupBean = (GroupBean) parent.getItemAtPosition(position);
+//                Intent intent1 = new Intent(GroupActivity.this, AddEditGroupActivity.class);
+//                long group_id = groupBean.getId();
+//                String groupTitile = groupBean.getGrouptitle();
+//                String description = groupBean.getDescription();
+//                intent1.putExtra("id",group_id);
+//                intent1.putExtra("grouptitle", groupTitile);
+//                intent1.putExtra("description", description);
+//                startActivity(intent1);
+//
+//            }
+//        });
 
         setLVLongClickListener();
 
@@ -125,8 +117,9 @@ public class GroupActivity extends AppCompatActivity  implements View.OnClickLis
         int viewId =view.getId();
         if(viewId == R.id.group_main_btn_add){
 
-            Intent it3 = new Intent(this, EditGroupActivity.class);
-            startActivity(it3);
+            Intent intent = new Intent(this, AddEditGroupActivity.class);
+            intent.putExtra("new_group", true);
+            startActivity(intent);
 
         }
     }
@@ -143,9 +136,9 @@ public class GroupActivity extends AppCompatActivity  implements View.OnClickLis
         groupLv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 0) {
-                    return false;
-                }
+//                if (position == 0) {
+//                    return false;
+//                }
                 int pos = position-1;
                 GroupBean clickBean = mDatas.get(pos+1);
 
@@ -160,11 +153,11 @@ public class GroupActivity extends AppCompatActivity  implements View.OnClickLis
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("prompt ").setMessage("Choose the options:")
 
-                .setNegativeButton("View", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Edit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        Intent intent1 = new Intent(GroupActivity.this, EditGroupActivity.class);
+                        Intent intent1 = new Intent(GroupActivity.this, AddEditGroupActivity.class);
                         long group_id = clickBean.getId();
                         String groupTitile = clickBean.getGrouptitle();
                         String description = clickBean.getDescription();
@@ -187,23 +180,6 @@ public class GroupActivity extends AppCompatActivity  implements View.OnClickLis
                         mDatas.remove(clickBean);
                         adapter.notifyDataSetChanged();
 
-                    }
-                })
-                .setPositiveButton("Edit", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-
-                        Intent intent1 = new Intent(GroupActivity.this, EditGroupActivity.class);
-                        long group_id = clickBean.getId();
-                        String groupTitile = clickBean.getGrouptitle();
-                        String description = clickBean.getDescription();
-                        intent1.putExtra("id",group_id);
-                        intent1.putExtra("grouptitle", groupTitile);
-                        intent1.putExtra("description", description);
-                        startActivity(intent1);
-
-                        adapter.notifyDataSetChanged();
                     }
                 });
         builder.create().show();
